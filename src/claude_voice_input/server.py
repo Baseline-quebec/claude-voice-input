@@ -2,6 +2,7 @@
 
 import os
 import tempfile
+
 from mcp.server.fastmcp import FastMCP
 
 from claude_voice_input.recorder import record_audio
@@ -54,7 +55,7 @@ def voice_listen(
 
     try:
         model = get_model()
-        segments, info = model.transcribe(tmp_path, language=language, beam_size=5)
+        segments, _info = model.transcribe(tmp_path, language=language, beam_size=5)
         text = " ".join(segment.text.strip() for segment in segments)
     finally:
         os.unlink(tmp_path)
@@ -80,7 +81,7 @@ def voice_transcribe_file(
         raise FileNotFoundError(f"File not found: {file_path}")
 
     model = get_model()
-    segments, info = model.transcribe(file_path, language=language, beam_size=5)
+    segments, _info = model.transcribe(file_path, language=language, beam_size=5)
     text = " ".join(segment.text.strip() for segment in segments)
 
     if not text.strip():
