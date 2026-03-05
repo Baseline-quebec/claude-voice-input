@@ -2,6 +2,7 @@
 
 import io
 import queue
+
 import numpy as np
 import sounddevice as sd
 from scipy.io import wavfile
